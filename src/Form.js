@@ -11,9 +11,22 @@ let submitConfirm = (details) => {
   alert(details);
 };
 
+let jobs = {
+    "programmer": <h2>Programmer Details...</h2>,
+    "ninja": <h2>Ninja Details...</h2>,
+    "test": <h2>Test Details...</h2>,
+    "designer": (properties) => {
+    return <h3>Job type: {properties.type}</h3>
+}
+}
+
+let getJob = (key,properties) => {
+    return typeof jobs[key] == 'function' ? jobs[key](properties) : jobs[key];
+}
+
 function nameF(name){
     return <><label> Name:
-        <input type="text" value={name} />
+        <input type="text" value={name}/>
     </label><br></br></>
     }
 
@@ -37,6 +50,7 @@ function telephoneF(telephone){
 
 export default (properties) => (
   <form>
+    {getJob(properties.test, properties)}
     {properties.name ? nameF() : ''}
     {properties.age ? ageF() : ''}
     {properties.gender ? genderF() : ''}
